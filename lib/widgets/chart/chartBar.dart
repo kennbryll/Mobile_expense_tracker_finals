@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+
+class ChartBar extends StatelessWidget {
+  final String label;
+  final double amount;
+  final double total;
+
+  ChartBar({
+    required this.label,
+    required this.amount,
+    required this.total,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(builder: (e, constraints) {
+      return Column(
+        children: <Widget>[
+          Container(
+            height: constraints.maxHeight * 0.13,
+            child: FittedBox(
+              child: Text('\₱${amount.toStringAsFixed(0)}'),
+            ),
+          ),
+          SizedBox(
+            height: constraints.maxHeight * 0.06,
+          ),
+          Container(
+            height: constraints.maxHeight * 0.5,
+            width: 14,
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 1.0),
+                    color: Color.fromRGBO(220, 220, 220, 10),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                FractionallySizedBox(
+                  heightFactor: total,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: constraints.maxHeight * 0.03,
+          ),
+          Container(
+            child: FittedBox(
+              child: Text(label),
+            ),
+            height: constraints.maxHeight * 0.10,
+          ),
+        ],
+      );
+    });
+  }
+}
